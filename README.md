@@ -85,6 +85,10 @@ python tools/plot_results.py runs/td3_s*/train.csv
 python tools/collect_results.py   # 汇总所有运行成一张表
 ```
 
+> 不想训练？仓库里带了训练好的模型 `results/models/td3_s0_policy.pt`（**94.84 分**，271 KB），
+> 直接 `python eval.py --ckpt results/models/td3_s0_policy.pt --episodes 5 --render --fps 10`
+> 就能看小车跑，说明见 [results/models/README.md](results/models/README.md)。
+
 跑 DDPG 基线：
 
 ```bash
