@@ -1,0 +1,34 @@
+# ---------------------------------------------------------------
+# 安装方式
+#
+# 1) 纯 CPU（最省事，PyPI 默认就是 CPU 构建）：
+#      pip install -r requirements.txt
+#
+# 2) NVIDIA 显卡 + GPU 版 torch（先装 torch，再装其余依赖）：
+#
+#    RTX 50 系（Blackwell, sm_120）  -> 必须 CUDA 12.8+ / torch >= 2.7
+#      pip install torch --index-url https://download.pytorch.org/whl/cu128
+#
+#    RTX 20/30/40 系（sm_75~89）     -> CUDA 12.4 即可
+#      pip install torch --index-url https://download.pytorch.org/whl/cu124
+#
+#    ⚠️ 老 wheel 在 50 系上会报
+#       "no kernel image is available for execution on the device"
+#       这不是驱动问题，是那个 wheel 里没有 sm_120 的 kernel。
+#
+# 3) 装完用这条确认：
+#      python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+# ---------------------------------------------------------------
+
+torch>=2.0
+numpy>=1.23
+
+# gym 后端二选一，代码（rl/envs.py）会自动探测，两种 API 都支持：
+gymnasium>=0.29
+# gym==0.23.0      # 第一版用的版本；注意它不支持 Python 3.13
+
+# 可选：只有 tools/plot_results.py 需要
+matplotlib>=3.5
+
+# 可选：只有 eval.py --render 的实时画面需要（gymnasium 经典控制环境用它渲染）
+pygame>=2.1
